@@ -3,7 +3,6 @@ from __future__ import absolute_import, unicode_literals
 
 
 # Third Party Stuff
-from .models import SuttaRequirement
 from rest_framework import generics
 from .serializers import SuttaRequirementSerializer
 from rest_framework.permissions import AllowAny

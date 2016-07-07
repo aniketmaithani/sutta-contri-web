@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 
     'compressor',
+    'sutta_contri.contri',
 )
 
 # INSTALLED APPS CONFIGURATION

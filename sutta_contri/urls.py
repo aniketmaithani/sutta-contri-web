@@ -16,6 +16,7 @@ from django.views.generic import TemplateView
 
 # Sutta Contri Stuff
 from sutta_contri.base import views as base_views
+from sutta_contri.contri import api
 
 from .routers import router
 
@@ -26,6 +27,8 @@ handler500 = base_views.server_error
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
+    url(r'^api/suttacontri/$',
+        api.SuttaRequirementViewSet.as_view(), name='requirements')
     # Your stuff: custom urls go here
 ]
 
@@ -53,11 +56,15 @@ if settings.API_DEBUG:
 
 if settings.DEBUG:
     # Livereloading
-    urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
+    urlpatterns += [url(r'^devrecargar/',
+                        include('devrecargar.urls', namespace='devrecargar'))]
 
     urlpatterns += [
-        url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception("Bad Request!")}),
-        url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception("Permission Denied!")}),
-        url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception("Not Found!")}),
+        url(r'^400/$', dj_default_views.bad_request,
+            kwargs={'exception': Exception("Bad Request!")}),
+        url(r'^403/$', dj_default_views.permission_denied,
+            kwargs={'exception': Exception("Permission Denied!")}),
+        url(r'^404/$', dj_default_views.page_not_found,
+            kwargs={'exception': Exception("Not Found!")}),
         url(r'^500/$', handler500),
     ]

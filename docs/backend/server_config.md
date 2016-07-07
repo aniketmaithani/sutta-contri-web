@@ -36,35 +36,35 @@ The deployment are managed via travis, but for the first time you'll need to set
 Run these commands to deploy this project on Heroku (substitue all references of `<heroku-app-name>` with the name your heroku application.)
 
 ```
-heroku create --ssh-git <heroku-app-name>
+heroku create --ssh-git sutta-contri
 
-heroku addons:create heroku-postgresql --app=<heroku-app-name>
-heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
-heroku pg:promote DATABASE_URL --app=<heroku-app-name>
+heroku addons:create heroku-postgresql --app=sutta-contri
+heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=sutta-contri
+heroku pg:promote DATABASE_URL --app=sutta-contri
 
-heroku addons:create mailgun --app=<heroku-app-name>
+heroku addons:create mailgun --app=sutta-contri
 heroku config:set EMAIL_HOST="\$MAILGUN_SMTP_SERVER" \
                   EMAIL_HOST_USER="\$MAILGUN_SMTP_LOGIN" \
-                  EMAIL_HOST_PASSWORD="\$MAILGUN_SMTP_PASSWORD" --app=<heroku-app-name>
+                  EMAIL_HOST_PASSWORD="\$MAILGUN_SMTP_PASSWORD" --app=sutta-contri
 
-heroku addons:create heroku-redis:hobby-dev --app=<heroku-app-name>
-heroku addons:create redismonitor --url `heroku config:get REDIS_URL --app=<heroku-app-name>` --app=<heroku-app-name>
+heroku addons:create heroku-redis:hobby-dev --app=sutta-contri
+heroku addons:create redismonitor --url `heroku config:get REDIS_URL --app=sutta-contri` --app=sutta-contri
 
-heroku addons:create newrelic --app=<heroku-app-name>
-heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
+heroku addons:create newrelic --app=sutta-contri
+heroku config:set NEW_RELIC_APP_NAME=sutta-contri --app=sutta-contri
 
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -hex 64` \
-SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
+SITE_DOMAIN=sutta-contri.herokuapp.com \
 SITE_SCHEME=https \
-SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
+SITE_NAME=DJANGO_SITE_NAME_HERE --app=sutta-contri
 
-heroku buildpacks:set heroku/python --app=<heroku-app-name>
-heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
+heroku buildpacks:set heroku/python --app=sutta-contri
+heroku buildpacks:add --index 1 heroku/nodejs --app=sutta-contri
 
 git push heroku master
-heroku run python manage.py createsuperuser --app=<heroku-app-name>
-heroku open --app=<heroku-app-name>
+heroku run python manage.py createsuperuser --app=sutta-contri
+heroku open --app=sutta-contri
 ```
 
 The following configuration doesn't allow you to "by default" upload the media on the heroku server as heroku does

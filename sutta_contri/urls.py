@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
     url(r'^api/suttacontri/$',
-        api.SuttaRequirementViewSet.as_view(), name='requirements')
+        api.SuttaRequirementViewSet.as_view(), name='requirements'),
+    url(r'^api/name/$', api.NormalViewSet.as_view(), name='name')
     # Your stuff: custom urls go here
 ]
 
